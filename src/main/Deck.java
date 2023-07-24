@@ -22,16 +22,17 @@ static int[] ofSpades= new int[13];
 
     public static void fillDeck(int[] array) {
 
-
+int number = 1;
         for (int i=0;i<array.length;i++) {
-            Random random = new Random();
-            int number = random.nextInt(1,13);
+
+
             array[i]=number;
+            number++;
         }
 
     }
     public static int takeACard(){
-        System.out.println(Arrays.toString(ofClubs));
+//        System.out.println(Arrays.toString(ofClubs));
          int card=0;
        Random random = new Random();
         Random random2 = new Random();
@@ -107,6 +108,9 @@ static int[] ofSpades= new int[13];
 
 
        }
+
+
+       // System.out.println("card= "+ card);
 
 
         return card;
