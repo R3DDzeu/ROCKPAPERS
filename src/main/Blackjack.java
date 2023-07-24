@@ -2,9 +2,13 @@ package main;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Blackjack {
-
+    static int balance = 100;
+    static int pHand = 0;
+    static int dHand =0 ;
+    static int bet = 0;
 
     //1. Method that checks if the player or the dealer has a blackjack.
 
@@ -16,6 +20,11 @@ public class Blackjack {
 
     //2. Method that deals a random card
 
+
+    // !!!!!!!!!!!!!!!!!! FIX THIS !!!!!!!!!!!!!!!!!!
+
+
+
     static int dealCard(){
         int card = 0;
         Random random = new Random();
@@ -26,6 +35,7 @@ public class Blackjack {
         switch (deck) {
             case 0 -> {
                 int pos = random.nextInt(Deck.ofSpades.length);
+
                 if (pos <= 10 && pos != 0) {
                     card = Deck.ofSpades[pos];
                     System.out.println(card + " of Spades");
@@ -117,7 +127,63 @@ public class Blackjack {
 
     }  //seems to be working?
 
+    //3. Method for insurance
+    static boolean insurance(boolean ins){
 
+        if (dHand==1){
+            System.out.println("Insurance?    yes/no");
+            Scanner insuranceScan = new Scanner(System.in);
+            String insurance = insuranceScan.nextLine();
+            if(insurance.equalsIgnoreCase("yes")){ balance = balance - bet/2;
+                ins= true;
+            }
+        } else {ins= false;}
+        return ins;
+    }
+
+
+    //4. Method which asks the player if he wants to hit or stand.
+    static void playerBet(){
+
+        System.out.println("Hit or Stand?");
+        Scanner pBetScan = new Scanner(System.in);
+        String pBet = pBetScan.nextLine();
+
+        if(pBet.equalsIgnoreCase("Hit")) {
+            pHand = pHand + dealCard();
+        } else if (pBet.equalsIgnoreCase("Stand")){
+            System.out.println("Your hand :" + pHand);
+        } else {
+            System.out.println("Not a valid option, game will close.");
+        }
+    }
+
+
+
+    // add condition if phand = dhand in Main code
+
+
+    //5. Method which verifies win conditions
+    static boolean isWin(boolean win){
+        if (pHand>21) {win = false;}
+        else if (pHand<21 && dHand>pHand) {win = false;}
+        else if (pHand<21 && pHand>dHand ) {win=true;}
+        else if (pHand==21) {win=true;}
+
+        return win;
+    }
+
+    //6. Method which modifies balance based on win/lose
+
+    static void updateBalance() {
+        int b;
+        if (isWin(true)){
+            b =bet;
+        } else {
+            b =-bet;}
+
+        balance = balance + b;
+    }
 
     public static void main(String[] args) {
         Deck.fillDeck(Deck.ofSpades);
@@ -137,6 +203,11 @@ public class Blackjack {
         System.out.println("Deck of Clubs = " + Arrays.toString(Deck.ofClubs));
         System.out.println("Deck of Hearts = " + Arrays.toString(Deck.ofHearts));
 
+
+
+
+
+        // in dealCard() method fix if statements by replacing pos for Deck.""[pos]
 
 
     }
