@@ -14,6 +14,7 @@ public class Deck {
     static int[] ofClubs = new int[13];
     static int balance = 100;
     boolean win;
+//test
 
     public static int[] removeCard(int[] arr, int index) {
         return IntStream.range(0, arr.length)

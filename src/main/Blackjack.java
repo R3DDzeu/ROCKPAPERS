@@ -48,7 +48,7 @@ public class Blackjack {
                         case 12 -> System.out.println("K of Spades");
                     }
                 }
-
+//test
 
                 Deck.ofSpades = Deck.removeCard(Deck.ofSpades, pos);
             }
